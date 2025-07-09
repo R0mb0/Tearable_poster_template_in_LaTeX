@@ -1,0 +1,107 @@
+\documentclass[a4paper,12pt]{article}
+
+% ================================================================================
+% 									Parameters
+% ================================================================================
+
+% Number of tabs at the bottom of the page
+\newcommand{\numTabs}{12}
+
+% Page Width (A4 = 21cm)
+\newcommand{\pageWidth}{21}
+
+% Margins in cm (Left and Right)
+\newcommand{\marginLeft}{2}
+\newcommand{\marginRight}{2}
+
+% Bottom margin in cm (It matches the height of the tabs)
+\newcommand{\marginBottom}{2.5}
+
+% Vertical distance from the bottom of the tabs in cm
+\newcommand{\tabTextYOffset}{0.1}
+
+% Radius of the box corners in mm
+\newcommand{\boxarc}{6}
+
+%  Width of the box corners in pt
+\newcommand{\boxlinewidth}{3}
+
+% Main text of the Announce 
+\newcommand{\mainTitle}{Main Title}
+\newcommand{\mainDesc}{Main description}
+\newcommand{\mainDetails}{Main details}
+\newcommand{\mainContact}{Call: \underline{Phone number}}
+
+% Testo sulle linguette
+\newcommand{\tabText}{Contact: Phone number}
+
+% ================================================================================
+% 								End	Parameters
+% ================================================================================
+\usepackage[margin=\marginLeft cm, right=\marginRight cm, left=\marginLeft cm, bottom=\marginBottom cm]{geometry}
+\usepackage{tikz}
+\usepackage{lmodern}
+\usepackage{rotating}
+\usepackage[most]{tcolorbox}
+\pagestyle{empty}
+
+\begin{document}
+	
+	\begin{center}
+		\begin{tcolorbox}[
+			colframe=black,
+			colback=white,
+			arc=\boxarc mm,
+			boxrule=\boxlinewidth pt,
+			width=0.93\textwidth,
+			left=8mm, right=8mm,
+			top=6mm, bottom=6mm,
+			enhanced,
+			]
+			\begin{center}
+				\Huge\bfseries
+				\mainTitle
+				
+				\vspace{0.5cm}
+				\large
+				\mainDesc
+				
+				\vspace{0.6cm}
+				%\normalsize
+				\mainDetails
+			\end{center}
+			\vspace{1cm}
+			\begin{center}
+				\textbf{\mainContact}
+			\end{center}
+		\end{tcolorbox}
+	\end{center}
+	
+	\vfill
+	
+	% Tabs at bottom
+	\noindent
+	\begin{tikzpicture}[remember picture, overlay]
+		% Page width
+		\pgfmathsetmacro{\usablewidth}{\pageWidth-\marginLeft-\marginRight}
+		% Height tabs
+		\pgfmathsetmacro{\tabheight}{\marginBottom}
+		% Y of line (at \marginBottom from bottom)
+		\pgfmathsetmacro{\lineY}{\marginBottom}
+		% Cicle for tabs
+		\foreach \i in {0,...,\numexpr\numTabs-1} {
+			\pgfmathsetmacro{\xstart}{\i*(\usablewidth/\numTabs)}
+			\pgfmathsetmacro{\xcenter}{\xstart+0.5*(\usablewidth/\numTabs)}
+			% Vertical dashed line
+			\draw[dashed] ({\xstart},{\lineY}) -- ({\xstart},-2);
+			% Rotated text centered in each tab, with a parametric offset from the bottom
+			\node[rotate=90, anchor=south, font=\small]
+			at ({\xcenter},{\tabTextYOffset})
+			{\tabText};
+		}
+		% Dashed line to the right of the first tab to close it
+		\draw[dashed] ({\usablewidth},{\lineY}) -- ({\usablewidth},-2);
+		% Horizontal dividing line
+		\draw[thick] (0,{\lineY}) -- ({\usablewidth},{\lineY});
+	\end{tikzpicture}
+\end{document}
