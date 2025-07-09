@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this template, please cite it as below."
+authors:
+- family-names: "Rombaldoni"
+  given-names: "Francesco"
+title: "Tearable_poster_template_in_LaTeX"
+version: 1.0.0
+date-released: 2025-07-09
+url: "https://github.com/R0mb0/Tearable_poster_template_in_LaTeX"
