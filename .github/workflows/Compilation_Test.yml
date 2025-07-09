@@ -12,10 +12,10 @@ jobs:
       - name: Compile files
         uses: xu-cheng/latex-action@v4
         with:
-          working_directory: Modular_document
-          root_file: Modular_document.tex
+          working_directory: Tearable_poster
+          root_file: Tearable_poster.tex
       - name: Upload compiled file
         uses: actions/upload-artifact@v4
         with: 
-          name: Modular_document
-          path: Modular_document/Modular_document.pdf
+          name: Tearable_poster
+          path: Tearable_poster/Tearable_poster.pdf
