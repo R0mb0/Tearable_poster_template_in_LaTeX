@@ -15,7 +15,7 @@ jobs:
           working_directory: Tearable_poster
           root_file: Tearable_poster.tex
       - name: Upload compiled file
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with: 
           name: Tearable_poster
           path: Tearable_poster/Tearable_poster.pdf
